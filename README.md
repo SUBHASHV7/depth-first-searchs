@@ -1,6 +1,6 @@
 <h1>ExpNo 2 : Implement Depth First Search Traversal of a Graph</h1> 
 <h3>Name: SUBHASH V</h3>
-<h3>Register Number:212224240163 </h3>
+<h3>Register Number: 212224240163 </h3>
 <H3>Aim:</H3>
 <p> To Implement Depth First Search Traversal of a Graph using Python 3.</p>
 <h3>Theory:</h3>
@@ -14,7 +14,8 @@ Step 1: Initially, stack and visited arrays are empty.
 Queue and visited arrays are empty initially.
 Stack and visited arrays are empty initially.
 Step 2: Visit 0 and put its adjacent nodes which are not visited yet into the stack.
- ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/86dcf7d9-1f9d-49b0-a821-5976a6e77606)
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/86dcf7d9-1f9d-49b0-a821-5976a6e77606)
 
  Visit node 0 and put its adjacent nodes (1, 2, 3) into the stack
  Visit node 0 and put its adjacent nodes (1, 2, 3) into the stack
@@ -71,34 +72,11 @@ F H <BR>
 <h3>Sample Output</h3>
 <hr>
 ['A', 'B', 'E', 'D', 'C', 'G', 'F', 'H']
+
 <hr>
 
-## PROGRAM:
-```
-from collections import defaultdict
-def dfs(graph,start,visited,path):
-    path.append(start)
-    visited[start]=True
-    for neighbour in graph[start]:
-        if visited[neighbour]==False:
-            dfs(graph,neighbour,visited,path)
-            visited[neighbour]=True
-    return path
-graph=defaultdict(list)
-nodes,edges=map(int,input().split())
-for _ in range(edges):
-    u,v=map(str,input().split())
-    #G.add_edge(u,v)
-    graph[u].append(v)
-    graph[v].append(u)
-start=input()
-visited=defaultdict(bool)
-path=[]
-traversedpath=dfs(graph,start,visited,path)
-print(traversedpath)
-```
 <hr>
-<h3>Input</h3>
+<h3>Sample Input</h3>
 <hr>
 5 5 <BR>
 0 1 <BR>
@@ -107,9 +85,41 @@ print(traversedpath)
 2 3 <BR>
 2 4 <BR>
 <hr>
-<h3>Output</h3>
+<h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+### PROGRAM:
+```PYTHON
+from collections import defaultdict
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+    for neighbour in sorted(graph[start]):   # sort to ensure consistent DFS order
+        if not visited[neighbour]:
+            dfs(graph, neighbour, visited, path)
+    return path
+graph = defaultdict(list)
+n, e = map(int, input().split())
+for i in range(e):
+    u, v = input().split()
+    graph[u].append(v)
+    graph[v].append(u)
+start = '0' if '0' in graph else 'A'
+visited = defaultdict(bool)
+path = []
+traversedpath = dfs(graph, start, visited, path)
+print(traversedpath)
+
+```
+### OUTPUT:
+
+<img width="462" height="257" alt="image" src="https://github.com/user-attachments/assets/07c0d7f5-fda5-4d5a-a42a-24fd9ab34513" />
+
+
+<img width="313" height="151" alt="image" src="https://github.com/user-attachments/assets/cf30a36d-6be1-4dc9-9d3f-e5988bb5cf65" />
+
+
 
 <hr>
 <h3>Result:</h3>
